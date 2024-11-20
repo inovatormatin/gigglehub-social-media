@@ -56,6 +56,13 @@ interface UpdateFollower {
   follower: number;
 }
 
+interface AppSliceTypes {
+  openPostForm: boolean;
+  openFollwerMod: boolean;
+  openFollwingMod: boolean;
+  refreshAvailable: boolean;
+}
+
 interface ProfileSliceTypes {
   id: string;
   email: string;
@@ -94,7 +101,8 @@ export {
   UsersListType,
   UpdateFollowing,
   UpdateFollower,
+  AppSliceTypes,
   ProfileSliceTypes,
   AddingPostData,
-  PostType
+  PostType,
 };

@@ -96,7 +96,25 @@ export const GET_USER_FOLLOWERS = gql`
             firstname
             lastname
             profile_pic
+            city
           }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_USER_FOLLOWEING = gql`
+  query GetFollowings($id: String!) {
+    followersCollection(filter: { following_id: { eq: $id } }) {
+      edges {
+        node {
+          id
+          username
+          firstname
+          lastname
+          profile_pic
+          city
         }
       }
     }

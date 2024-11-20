@@ -83,16 +83,17 @@ const Profile: React.FC = () => {
               {profileState.email}
             </p>
             {profileState.city &&
-            <p className="flex items-center text-sm font-normal max-w-xs truncate">
-              <MapPin className="mr-1" />
-              {profileState.city}
-            </p>
+              <p className="flex items-center text-sm font-normal max-w-xs truncate">
+                <MapPin className="mr-1" />
+                {profileState.city}
+              </p>
             }
           </section>
           <section className="w-full flex justify-evenly mb-2">
             <h4 className="text-sm font-medium">{profileState.followers} Followers</h4>
             <h4 className="text-sm font-medium">{profileState.following} Following</h4>
           </section>
+          {/* Logout button */}
           <TailButton
             size="xs"
             label={loading ? "Wait" : "Log out"}

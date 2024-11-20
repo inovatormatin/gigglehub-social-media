@@ -8,14 +8,16 @@ import { toast } from 'react-toastify';
 import Cookies from "universal-cookie";
 import { ADD_POST } from '../../graphQl';
 import { useMutation } from '@apollo/client';
+import { AppDispatch, useAppSelector } from '../../redux/store';
+import { useDispatch } from 'react-redux';
+import { closePostForm } from '../../redux/AppSlice';
 const cookies = new Cookies();
 
-interface Fprops {
-    showAddPostModal: boolean;
-    handleCloseModal: () => void;
-}
+interface Fprops {}
 
-const PostForm: React.FC<Fprops> = ({ handleCloseModal, showAddPostModal }) => {
+const PostForm: React.FC<Fprops> = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const { openPostForm } = useAppSelector(state => state.appState)
     const [uploadPostQuery] = useMutation(ADD_POST);
     const [fetchPostUpload, setFetchPostUpload] = useState<boolean>(false);
     const [addPostContent, setAddPostContent] = useState<AddingPostData>({
@@ -90,7 +92,7 @@ const PostForm: React.FC<Fprops> = ({ handleCloseModal, showAddPostModal }) => {
             });
             toast.success("Post Uploaded.");
             setFetchPostUpload(false);
-            handleCloseModal();
+            dispatch(closePostForm());
             // reset state to clean inputs so that when user open modal dont get previous filled data.
             setAddPostContent({
                 caption: '',
@@ -110,9 +112,9 @@ const PostForm: React.FC<Fprops> = ({ handleCloseModal, showAddPostModal }) => {
             <TailModal
                 title="Add a post."
                 loading={fetchPostUpload}
-                open={showAddPostModal}
+                open={openPostForm}
                 onClose={() => {
-                    handleCloseModal();
+                    dispatch(closePostForm());
                     setAddPostContent({
                         caption: '',
                         image: null,

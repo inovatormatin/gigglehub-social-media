@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch, useAppSelector } from "../../redux/store";
 import { updateFollowing } from "../../redux/ProfileSlice";
 import { TailSpinner } from "..";
+import { toggleRefresh } from "../../redux/AppSlice";
 const cookies = new Cookies();
 
 interface Fprops {
@@ -43,6 +44,7 @@ const UserListCard: React.FC<Fprops> = ({ data }) => {
         following_id: data.id
       });
       dispatch(updateFollowing({ following: followUser.followuserfnc }));
+      dispatch(toggleRefresh(true));
       setUserFollowing(true)
     } catch (err) {
       console.error(err)

@@ -14,9 +14,10 @@ interface Fprops {
     loading?: boolean;
     buttonIcon?: React.ReactNode
     onClick: () => void
+    hideFooter?: boolean
 }
 
-const Modal: React.FC<Fprops> = ({ open, title, body, onClose, buttonIcon, onClick, loading = false, confirmLable = 'Confirm' }) => {
+const Modal: React.FC<Fprops> = ({ open, title, body, onClose, buttonIcon, onClick, hideFooter = false, loading = false, confirmLable = 'Confirm' }) => {
     return (
         <>
             {open ? (
@@ -41,26 +42,28 @@ const Modal: React.FC<Fprops> = ({ open, title, body, onClose, buttonIcon, onCli
 
 
                         {/* <!-- Modal Footer --> */}
-                        <div className="px-6 py-4 border-t border-gray-200 flex justify-end">
-                            {!loading &&
+                        {!hideFooter &&
+                            <div className="px-6 py-4 border-t border-gray-200 flex justify-end">
+                                {!loading &&
+                                    <TailButton
+                                        label="Cancel"
+                                        color="red"
+                                        size="xs"
+                                        onClick={onClose}
+                                        icon={<X weight="bold" />}
+                                    />
+                                }
                                 <TailButton
-                                    label="Cancel"
-                                    color="red"
+                                    label={loading ? 'Uploading...' : confirmLable}
+                                    color="green"
                                     size="xs"
-                                    onClick={onClose}
-                                    icon={<X weight="bold" />}
+                                    classes="ml-2"
+                                    disabled={loading}
+                                    icon={loading ? <TailSpinner /> : buttonIcon}
+                                    onClick={onClick}
                                 />
-                            }
-                            <TailButton
-                                label={loading ? 'Uploading...' : confirmLable}
-                                color="green"
-                                size="xs"
-                                classes="ml-2"
-                                disabled={loading}
-                                icon={loading ? <TailSpinner /> : buttonIcon}
-                                onClick={onClick}
-                            />
-                        </div>
+                            </div>
+                        }
                     </div>
                 </div>
             ) : (

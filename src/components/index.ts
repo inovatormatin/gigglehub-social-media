@@ -17,3 +17,5 @@ export { default as Post } from "./Post";
 export { default as Nomorecard } from "./Post/Nomorecard";
 export { default as PostForm } from "./PostForm";
 export { default as ScrollingFeed } from "./ScrollingFeed";
+export { default as Header } from "./ScrollingFeed/Header";
+
