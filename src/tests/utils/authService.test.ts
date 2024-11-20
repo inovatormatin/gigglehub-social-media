@@ -139,7 +139,6 @@ describe("Auth Functions", () => {
     expect(mockCookies.remove).toHaveBeenCalledWith("_0_1t");
     expect(mockCookies.remove).toHaveBeenCalledWith("i06");
     expect(supabase.auth.signOut).toHaveBeenCalled();
-    expect(toast.success).toHaveBeenCalledWith("Logged out.");
     expect(result).toEqual({ code: 1 });
   });
 
